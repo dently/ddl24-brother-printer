@@ -1,0 +1,10 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "brother-ddl-print": ["../src/index"],
+      "brother-ddl-print/*": ["../src/*"]
+    }
+  }
+}

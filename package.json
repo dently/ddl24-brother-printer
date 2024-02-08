@@ -1,0 +1,42 @@
+{
+  "name": "brother-ddl-print",
+  "version": "0.1.0",
+  "description": "Creates a bridge to print directly to wireless printer",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
+  "scripts": {
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "open -a \"Xcode\" example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
+  },
+  "keywords": [
+    "react-native",
+    "expo",
+    "brother-ddl-print",
+    "BrotherDdlPrint"
+  ],
+  "repository": "https://github.com/WillDent/brother-ddl-print",
+  "bugs": {
+    "url": "https://github.com/WillDent/brother-ddl-print/issues"
+  },
+  "author": "Will Dent <will@dent.ly> (https://github.com/WillDent)",
+  "license": "MIT",
+  "homepage": "https://github.com/WillDent/brother-ddl-print#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react": "^18.0.25",
+    "expo-module-scripts": "^3.4.1",
+    "expo-modules-core": "^1.11.8"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
+  }
+}
