@@ -63,7 +63,7 @@ public class BrotherDdlPrintModule: Module {
       #endif 
     }
 
-    AsyncFunction("printSamplePDF") {( modelName: String, ipAddress: String, serialNumber: String, printerType: String, strFilePath: String, promise: Promise) in
+    AsyncFunction("printRJ_4230B") {( modelName: String, ipAddress: String, serialNumber: String, printerType: String, strFilePath: String, promise: Promise) in
         #if targetEnvironment(simulator)
         let myUrlString = "file:///private/" + strFilePath
         guard let url = URL(string: myUrlString) else {
@@ -122,6 +122,67 @@ public class BrotherDdlPrintModule: Module {
           }
         #endif 
       }
+      
+      AsyncFunction("printTD_4550") {( modelName: String, ipAddress: String, serialNumber: String, printerType: String, strFilePath: String, promise: Promise) in
+          #if targetEnvironment(simulator)
+          let myUrlString = "file:///private/" + strFilePath
+          guard let url = URL(string: myUrlString) else {
+              promise.resolve("Error2 - PDF file is not found.")
+              return
+          }
+            promise.resolve("Cant print pdf \(url)");
+          #else
+          print("modelName: \(modelName) ipAddress: \(ipAddress) serialNumber: \(serialNumber) printerType: \(printerType)");
+          
+            let channel = BRLMChannel(bluetoothSerialNumber: serialNumber)
+
+            let generateResult = BRLMPrinterDriverGenerator.open(channel)
+            guard generateResult.error.code == BRLMOpenChannelErrorCode.noError,
+                let printerDriver = generateResult.driver else {
+                    promise.resolve("Error - Open Channel: \(generateResult.error.code)")
+                    return
+            }
+            defer {
+                printerDriver.closeChannel()
+            }
+          // let url = Bundle.main.url(forResource: "samplepdf2", withExtension: "pdf")
+          // print("url \(url)");
+          
+          
+          let myUrlString = "file:///private/" + strFilePath
+          guard let url = URL(string: strFilePath) else {
+              promise.resolve("Error2 - PDF file is not found.")
+              return
+          }
+          let printerSerieseFromModel = BRLMPrinterClassifier.transferEnum(from:modelName)
+          
+              print("printerSerieseFromModel \(printerSerieseFromModel)")
+          let printSettings = BRLMTDPrintSettings(defaultPrintSettingsWith: BRLMPrinterModel.TD_4550DNWB)
+  //            let printSettings = BRLMTDPrintSettings(defaultPrintSettingsWith: BRLMPrinterModel.RJ_4230B)
+              
+          let defaultPrintSettings = BRLMTDPrintSettings() // Initialize with default values
+
+            // Set your paper information
+            let margins = BRLMCustomPaperSizeMargins(top: 0.12, left: 0.06, bottom: 0.12, right: 0.06)
+
+          let customPaperSize = BRLMCustomPaperSize(dieCutWithTapeWidth: 4, tapeLength: 6, margins: margins, gapLength: 0.125, unitOfLength: .inch)
+              printSettings?.customPaperSize = customPaperSize
+              printSettings?.numCopies = 1
+           
+          let printError = printerDriver.printPDF(with: url, settings: printSettings ?? defaultPrintSettings)
+
+          
+
+            if printError.code != .noError {
+                print("Error - Print PDF: \(printError.code)")
+              promise.resolve("Error - Print Image: \(printError.code)")
+            }
+            else {
+              promise.resolve("Success - Print Image")
+            }
+          #endif
+        }
+  
     }
 }
 

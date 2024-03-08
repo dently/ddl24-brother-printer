@@ -10,14 +10,29 @@ export function startSearchBluetoothPrinter() {
   return BrotherPrint.startSearchBluetoothPrinter();
 }
 
-export function printSamplePDF(
+export function printTD_4550(
   modelName: string,
   ipAddress: string,
   serialNumber: string,
   printerType: string,
   strFilePath: string,
 ) {
-  return BrotherPrint.printSamplePDF(
+  return BrotherPrint.printTD_4550(
+    modelName,
+    ipAddress,
+    serialNumber,
+    printerType,
+    strFilePath,
+  );
+}
+export function printRJ_4230B(
+  modelName: string,
+  ipAddress: string,
+  serialNumber: string,
+  printerType: string,
+  strFilePath: string,
+) {
+  return BrotherPrint.printRJ_4230B(
     modelName,
     ipAddress,
     serialNumber,
