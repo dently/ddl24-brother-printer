@@ -1,6 +1,6 @@
 {
   "name": "brother-ddl-print",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Creates a bridge to print directly to wireless printer",
   "main": "build/index.js",
   "types": "build/index.d.ts",
@@ -21,13 +21,13 @@
     "brother-ddl-print",
     "BrotherDdlPrint"
   ],
-  "repository": "https://github.com/WillDent/brother-ddl-print",
+  "repository": "https://github.com/dently/ddl24-brother-printer",
   "bugs": {
-    "url": "https://github.com/WillDent/brother-ddl-print/issues"
+    "url": "https://github.com/dently/ddl24-brother-printer/issues"
   },
   "author": "Will Dent <will@dent.ly> (https://github.com/WillDent)",
   "license": "MIT",
-  "homepage": "https://github.com/WillDent/brother-ddl-print#readme",
+  "homepage": "https://github.com/dently/ddl24-brother-printer#readme",
   "dependencies": {},
   "devDependencies": {
     "@types/react": "^18.0.25",
